@@ -1,8 +1,8 @@
-# golang-clean-architecture
+# golang-Restful-api-Test
 
 ## Description
 
-this is golang clean architecture template.
+this is golang Restful API test.
 
 ## Architecture
 
