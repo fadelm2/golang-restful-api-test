@@ -3,9 +3,9 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "name": "Joko 3",
-  "id": "joko 3",
-  "password": "joko 3",
+  "name": "Joko 1",
+  "id": "joko 8",
+  "password": "joko",
   "address": "jalan belum jadi",
   "photos": "ini foto"
 }
@@ -16,8 +16,8 @@ POST http://localhost:3000/api/users/_login
 Content-Type: application/json
 
 {
-  "id": "joko 3",
-  "password": "joko 3"
+  "id": "joko 8",
+  "password": "joko"
 }
 
 ### Get user profile
@@ -75,11 +75,10 @@ Accept: application/json
 Authorization: {{token}}
 
 {
-  "name":    "request.Name",
-  "number":  "request.Number",
-  "expired": "request.Expired",
-  "cvv":     "request.Cvv",
-  "userId":  "request.UserId"
+  "name":    "master 1",
+  "number":  "12313121321",
+  "expired": "20/23",
+  "cvv":     "123"
 }
 
 ### delete Creditcard

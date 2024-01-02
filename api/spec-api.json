@@ -23,14 +23,8 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "id": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
                   }
                 },
                 "required": [
@@ -227,37 +221,37 @@
           }
         },
         "responses": {
-            "200": {
-              "description": "Success register new user",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "created_at": {
-                        "type": "number"
-                      },
-                      "updated_at": {
-                        "type": "number"
-                      }
+          "200": {
+            "description": "Success register new user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "number"
+                    },
+                    "updated_at": {
+                      "type": "number"
                     }
                   }
                 }
               }
             }
+          }
         }
       }
     },
-    "/api/contacts": {
+    "/api/Creditcards": {
       "post": {
-        "tags": ["Contact API"],
-        "description": "Create New Contact",
+        "tags": ["Creditcard API"],
+        "description": "Create New Creditcard",
         "parameters": [
           {
             "name": "Authorization",
@@ -293,7 +287,7 @@
         },
         "responses": {
           "200": {
-            "description": "Succes create new contact",
+            "description": "Succes create new Creditcard",
             "content": {
               "application/json": {
                 "schema": {
@@ -302,27 +296,7 @@
                     "data": {
                       "type": "object",
                       "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "first_name": {
-                          "type": "string"
-                        },
-                        "last_name": {
-                          "type": "string"
-                        },
-                        "email": {
-                          "type": "string"
-                        },
-                        "phone": {
-                          "type": "string"
-                        },
-                        "created_at": {
-                          "type": "number"
-                        },
-                        "updated_at": {
-                          "type": "number"
-                        }
+                        "ref": "#/components/schemas/creditcard"
                       }
                     }
                   }
@@ -333,8 +307,8 @@
         }
       },
       "get" : {
-        "tags": ["Contact API"],
-        "description": "Get All contact",
+        "tags": ["Creditcard API"],
+        "description": "Get All Creditcard",
         "parameters": [
           {
             "name": "authorization",
@@ -363,7 +337,7 @@
             }
           },
           {
-            "name": "number",
+            "name": "name",
             "in": "query",
             "schema": {
               "type": "string"
@@ -388,7 +362,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success get list of contacts",
+            "description": "Success get list of Creditcards",
             "content": {
               "application/json": {
                 "schema": {
@@ -404,7 +378,7 @@
                           },
                           "firt_name": {
                             "type": "string"
-                        },
+                          },
                           "last_name": {
                             "type": "string"
                           },
@@ -448,10 +422,10 @@
         }
       }
     },
-    "/api/contacts/{contactId}" : {
+    "/api/creditcard/{creditcards}" : {
       "get": {
-        "tags": ["Contact API"],
-        "description": "Get contact by id",
+        "tags": ["Creditcard API"],
+        "description": "Get Creditcard by id",
         "parameters": [
           {
             "name": "Authorization",
@@ -462,7 +436,7 @@
             }
           },
           {
-            "name": "contactId",
+            "name": "CreditcardId",
             "in": "path",
             "required": true,
             "schema": {
@@ -472,7 +446,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success get contact",
+            "description": "Success get Creditcard",
             "content": {
               "application/json": {
                 "schema": {
@@ -507,8 +481,8 @@
         }
       },
       "put": {
-        "tags": ["Contact API"],
-        "description": "Update contact by id",
+        "tags": ["Creditcard API"],
+        "description": "Update Creditcard by id",
         "parameters": [
           {
             "name": "Authorization",
@@ -519,7 +493,7 @@
             }
           },
           {
-            "name": "contactId",
+            "name": "CreditcardId",
             "in": "path",
             "required": true,
             "schema": {
@@ -552,7 +526,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success update contact",
+            "description": "Success update Creditcard",
             "content": {
               "application/json": {
                 "schema": {
@@ -592,8 +566,8 @@
         }
       },
       "delete": {
-        "tags": ["Contact API"],
-        "description": "Delete contact by id",
+        "tags": ["Creditcard API"],
+        "description": "Delete Creditcard by id",
         "parameters": [
           {
             "name": "Authorization",
@@ -604,7 +578,7 @@
             }
           },
           {
-            "name": "contactId",
+            "name": "CreditcardId",
             "in": "path",
             "required": true,
             "schema": {
@@ -614,7 +588,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succes delete contact",
+            "description": "Succes delete Creditcard",
             "content": {
               "application/json": {
                 "schema": {
@@ -631,360 +605,67 @@
         }
       }
     },
-    "/api/contacts/{contactId}/addresses": {
-      "post": {
-        "tags": ["Address API"],
-        "description": "Create New address",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
           },
-          {
-            "name": "contactId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
+          "name": {
+            "type": "string",
+            "example": "theUser"
+          },
+          "address": {
+            "type": "string",
+            "example": "jalan fifa, no 8 , JAKARTA"
+          },
+          "email": {
+            "type": "string",
+            "example": "john@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "12345"
+          },
+          "photos": {
+            "type": "object",
+            "properties": {
+              "1" : {"type": "string"},
+              "2" : {"type": "string"}
             }
           }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "street": {
-                    "type": "string"
-                  },
-                  "city": {
-                    "type": "string"
-                  },
-                  "province": {
-                    "type": "string"
-                  },
-                  "country": {
-                    "type": "string"
-                  },
-                  "postal_code": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success create new address",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "street": {
-                      "type": "string"
-                    },
-                    "city": {
-                      "type": "string"
-                    },
-                    "province": {
-                      "type": "string"
-                    },
-                    "country": {
-                      "type": "string"
-                    },
-                    "postal_code": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-
         }
       },
-      "get": {
-        "tags": ["Address API"],
-        "description": "Get All Addresses",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
           },
-          {
-            "name": "contactId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
           }
-        ],
-        "responses": {
-            "200": {
-              "description": "Succes get list of addresses",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "street": {
-                        "type": "string"
-                      },
-                      "city": {
-                        "type": "string"
-                      },
-                      "province": {
-                        "type": "string"
-                      },
-                      "country": {
-                        "type": "string"
-                      },
-                      "postal_code": {
-                        "type": "string"
-                      },
-                      "created_at": {
-                        "type": "number"
-                      },
-                      "updated_at": {
-                        "type": "number"
-                      }
-                    }
-                  }
-                }
-              }
-            }
         }
       }
     },
-    "/api/contacts/{contactId}/addresses/{addressId}": {
-      "get": {
-        "tags": ["Address API"],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
+    "requestBodies": {
+      "UserArray": {
+        "description": "List of user object",
+        "content": {
+          "application/json": {
             "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "contactId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "addressId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success create new address",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "street": {
-                          "type": "string"
-                        },
-                        "city": {
-                          "type": "string"
-                        },
-                        "province": {
-                          "type": "string"
-                        },
-                        "country": {
-                          "type": "string"
-                        },
-                        "postal_code": {
-                          "type": "string"
-                        },
-                        "created_at": {
-                          "type": "number"
-                        },
-                        "updated_at": {
-                          "type": "number"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["Address API"],
-        "description": "Update address by id",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "contactId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "addressId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "street": {
-                    "type": "string"
-                  },
-                  "city": {
-                    "type": "string"
-                  },
-                  "province": {
-                    "type": "string"
-                  },
-                  "country": {
-                    "type": "string"
-                  },
-                  "postal_code": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success create new address",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "street": {
-                          "type": "string"
-                        },
-                        "city": {
-                          "type": "string"
-                        },
-                        "province": {
-                          "type": "string"
-                        },
-                        "country": {
-                          "type": "string"
-                        },
-                        "postal_code": {
-                          "type": "string"
-                        },
-                        "created_at": {
-                          "type": "number"
-                        },
-                        "updated_at": {
-                          "type": "number"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": ["Address API"],
-        "description": "Delete address by id",
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "contactId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "addressId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success create new address",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "boolean"
-                    }
-                  }
-                }
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/User"
               }
             }
           }
@@ -992,4 +673,5 @@
       }
     }
   }
+
 }

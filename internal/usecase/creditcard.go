@@ -83,7 +83,7 @@ func (c *CreditcardUseCase) Update(ctx context.Context, request *model.UpdateCre
 		c.Log.WithError(err).Error("error validating request body")
 		return nil, fiber.ErrBadRequest
 	}
-
+	Creditcard.Type = request.Type
 	Creditcard.Name = request.Name
 	Creditcard.Number = request.Number
 	Creditcard.Expired = request.Expired

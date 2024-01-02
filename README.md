@@ -47,7 +47,12 @@ All API Spec is in `api` folder.
 
 ## Database Migration
 
-All database migration is in `db/migrations` folder.
+All database migration is in `db/migrations` folder
+.
+### Installation Container Kafka and Mysql Server with docker 
+```Shell
+docker compose up
+```
 
 ### Create Migration
 
@@ -55,10 +60,12 @@ All database migration is in `db/migrations` folder.
 migrate create -ext sql -dir db/migrations create_table_xxxx
 ```
 
+```Shell
+docker compose up```
 ### Run Migration
 
 ```shell
-migrate -database "mysql://root:@tcp(localhost:3306)/golang_test?charset=utf8mb4&parseTime=True&loc=Local" -path db/migrations up
+migrate -database "mysql://root:@tcp(localhost:3307)/golang_test?charset=utf8mb4&parseTime=True&loc=Local" -path db/migrations up
 ```
 
 ### Run Appication
