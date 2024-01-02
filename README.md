@@ -54,18 +54,41 @@ All database migration is in `db/migrations` folder
 docker compose up
 ```
 
+```shell
+docker compose -f docker.kafka.yml up -d
+```
+# Create Database
+
+#Docker exec container mysql
+```Shell 
+docker exec -it mysql8 bash -l
+```
+
+```Shell 
+mysql -u root -p root
+```
+
+#create database
+```Shell 
+create database golang_test;
+```
+
+
 ### Create Migration
 
 ```Shell
-migrate create -ext sql -dir db/migrations create_table_xxxx
+migrate create -ext sql -dir db/migrations create_table_users
 ```
 
 ```Shell
-docker compose up```
+migrate create -ext sql -dir db/migrations create_table_creditcard
+```
+
+
 ### Run Migration
 
 ```shell
-migrate -database "mysql://root:@tcp(localhost:3307)/golang_test?charset=utf8mb4&parseTime=True&loc=Local" -path db/migrations up
+migrate -database "mysql://root:root@tcp(localhost:3310)/golang_test?charset=utf8mb4&parseTime=True&loc=Local" -path db/migrations up
 ```
 
 ### Run Appication

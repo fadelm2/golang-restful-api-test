@@ -11,9 +11,9 @@
   },
   "database": {
     "username": "root",
-    "password": "1234567",
+    "password": "root",
     "host": "localhost",
-    "port": 3307,
+    "port": 3310,
     "name": "golang_test",
     "pool": {
       "idle": 10,

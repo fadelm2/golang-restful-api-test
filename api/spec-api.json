@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Golang Clean Architecture",
-    "description": "Golang Clean Architecture",
+    "title": "Golang Restful API Test",
+    "description": "Golang Restful API Test",
     "version": "1.0.0"
   },
   "servers": [
