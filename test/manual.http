@@ -1,0 +1,91 @@
+## Register new user
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Joko 3",
+  "id": "joko 3",
+  "password": "joko 3",
+  "address": "jalan belum jadi",
+  "photos": "ini foto"
+}
+
+### Login user
+
+POST http://localhost:3000/api/users/_login
+Content-Type: application/json
+
+{
+  "id": "joko 3",
+  "password": "joko 3"
+}
+
+### Get user profile
+### Get user profile
+GET http://localhost:3000/api/users/_current
+Accept: application/json
+Authorization: {{token}}
+
+### Logour User
+DELETE http://localhost:3000/api/users
+Accept: application/json
+Authorization: {{token}}
+
+### Update user
+PATCH http://localhost:3000/api/users/_current
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Joko Udin"
+}
+
+### Create Creditcard
+POST http://localhost:3000/api/creditcards
+Content-Type: application/json
+Accept: application/json
+Authorization:{{token}}
+
+{
+  "type" : "visa ",
+  "name":    "master",
+  "number":  "112333455666",
+  "expired": "12-12-29",
+  "cvv":     "1231",
+  "userId":  "joko 3"
+}
+
+### Get detail Creditcard
+GET http://localhost:3000/api/Creditcards/b2e2fcd1-59d4-4bb8-a83a-b95eb4271dc0
+Content-Type: application/json
+Accept: application/json
+Authorization: {{token}}
+
+### Search Creditcards
+GET http://localhost:3000/api/Creditcards?size=10&page=1&name=mas&number=1123
+Content-Type: application/json
+Accept: application/json
+Authorization:{{token}}
+
+
+### update Creditcard
+PUT http://localhost:3000/api/Creditcards/{{CreditcardId}}
+Content-Type: application/json
+Accept: application/json
+Authorization: {{token}}
+
+{
+  "name":    "request.Name",
+  "number":  "request.Number",
+  "expired": "request.Expired",
+  "cvv":     "request.Cvv",
+  "userId":  "request.UserId"
+}
+
+### delete Creditcard
+DELETE http://localhost:3000/api/Creditcards/b2e2fcd1-59d4-4bb8-a83a-b95eb4271dc0
+Accept: application/json
+Authorization: {{token}}
+
+
+

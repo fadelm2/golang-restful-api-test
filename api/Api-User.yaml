@@ -1,0 +1,302 @@
+openapi: 3.0.3
+info:
+  title: Sewa Asri
+  description: |-
+    Sewa Asri adalah aplikasi mobile yang dapat digunakan untuk booking dan mencari villa terdekat dengan praktis.
+  termsOfService: http://sewasri.org/terms/
+  contact:
+    email: asriteam@sewasri.org
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Sewa Asri
+  url: http://sewasri.org
+servers:
+  - url: http://localhost:8080/api/
+tags:
+  - name: user
+    description: Operations about user
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: login user
+      description: This Login User
+      operationId: loginUser
+      requestBody:
+        required: true
+        description: Login User
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginDto'
+      responses:
+        '200':
+          description: User Has been logged in
+        '400':
+          description: Invalid username/password supplied
+  /auth/logout:
+    get:
+      tags:
+        - Auth
+      summary: Logs out current logged in user session
+      description: ''
+      operationId: logoutUser
+      parameters: [ ]
+      responses:
+        default:
+          description: successful operation
+  /user/:{userId}:
+    get:
+      tags:
+        - User
+      summary: Get user by user id
+      description: ''
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          description: 'The name that needs to be fetched. Use user1 for testing. '
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid userId supplied
+        '404':
+          description: User not found
+    put:
+      tags:
+        - User
+      summary: Update user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      parameters:
+        - name: userId
+          in: path
+          description: name that need to be update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Update an existent user in the booking
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        default:
+          description: successful operation
+  /user:
+    get:
+      tags:
+        - User
+      summary: Creates list of users with given input array
+      description: Creates list of users with given input array
+      operationId: createUsersWithListInput
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: successful operation
+  /user/{userId}:
+        delete:
+          tags:
+            - User
+          summary: Delete user
+          description: This can only be done by the logged in user.
+          operationId: deleteUser
+          parameters:
+            - name: userId
+              in: path
+              description: The name that needs to be deleted
+              required: true
+              schema:
+                type: string
+          responses:
+            '400':
+              description: Invalid userId supplied
+            '404':
+              description: User not found
+  /user/{userId}/bookmark:
+    get:
+      tags:
+        - User
+      summary: waiting list villa user
+      description: This can only be done by the logged in user.
+      operationId: Bookmark villa User
+      parameters:
+        - name: userId
+          in: path
+          description: The name that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/villaArray'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+          example: Jl gunung 123
+        city:
+          type: string
+          example: Bali
+        state:
+          type: string
+          example: Indonesia
+        zip:
+          type: string
+          example: '94301'
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Termurah
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        name:
+          type: string
+          example: theUser
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: "undefined"
+        phone:
+          type: string
+          example: '12345'
+        address:
+          type: string
+          example: jl.gunung agung.no 1 bali
+        isAdmin:
+          type: boolean
+          description: is Admin
+          format: int32
+          example: false
+
+    villaArray:
+      required:
+        - name
+        - photoUrls
+      type: object
+      properties:
+        VillaId:
+          type: integer
+          format: int64
+          example: [10, 20, 30, 40]
+
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+    LoginDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: Udin@test.com
+        password:
+          type: string
+          example: 1234556QQ
+  requestBodies:
+    villa:
+      description: villa object that needs to be added to the booking
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/villaArray'
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+  securitySchemes:
+    villabooking_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://villabooking3.swagger.io/oauth/authorize
+          scopes:
+            write:villas: modify villas in your account
+            read:villas: read your villas
+
+
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
